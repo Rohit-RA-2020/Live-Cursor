@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
-import { AiFillGithub } from "react-icons/ai";
-import { VscWand } from "react-icons/vsc";
-import AppwriteConfig from "../config/appwrite_config";
+import { AppwriteConfig } from "../config/appwrite_config";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
