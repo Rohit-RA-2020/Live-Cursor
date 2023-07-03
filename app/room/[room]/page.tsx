@@ -85,8 +85,9 @@ export default function RoomPage({ params }: { params: { room: string } }) {
                 `${process.env.NEXT_PUBLIC_DATABASEID}`,
                 params["room"],
                 JSON.parse(localStorage.getItem("userInfo") || "{}").$id
-              );
-              router.push(`/room`);
+              ).then(() => {
+                router.push(`/room`);
+              });
             }}
           >
             Exit Room
