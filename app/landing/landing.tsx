@@ -19,23 +19,32 @@ const CreateRoomButton = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    serverConfig
-      .createRoom(
-        roomName,
-        JSON.parse(localStorage.getItem("userInfo") || "{}").$id
-      )
+    serverConfig.createRoom(
+      roomName,
+      JSON.parse(localStorage.getItem("userInfo") || "{}").$id
+    );
     router.push(`/room`);
   };
 
   return (
     <div className="h-screen flex items-center justify-center">
       {!showForm ? (
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          onClick={handleCreateRoom}
-        >
-          Create Room
-        </button>
+        <div className="flex space-x-4">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+            onClick={handleCreateRoom}
+          >
+            Create Room
+          </button>
+          <button
+            className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
+            onClick={() => {
+              router.push(`/room`)
+            }}
+          >
+            Explore Rooms
+          </button>
+        </div>
       ) : (
         <form onSubmit={handleSubmit} className="mt-4">
           <input

@@ -50,9 +50,8 @@ export default function Room() {
                       server.databases.createDocument(
                         `${process.env.NEXT_PUBLIC_DATABASEID}`,
                         item.$id,
-                        JSON.parse(
-                          localStorage.getItem("userInfo") || "{}"
-                        ).$id,
+                        JSON.parse(localStorage.getItem("userInfo") || "{}")
+                          .$id,
                         {
                           name: JSON.parse(
                             localStorage.getItem("userInfo") || "{}"
@@ -74,9 +73,28 @@ export default function Room() {
               </div>
             ))}
         </div>
-        <button className="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-          Button
-        </button>
+        <div className="text-center mx-auto">
+          <button
+            className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset"
+            onClick={() => router.push(`/landing`)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="w-4 h-4 inline-block align-text-top"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            <span className="inline-block ml-1">Back</span>
+          </button>
+        </div>
       </div>
     </section>
   );

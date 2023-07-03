@@ -37,7 +37,7 @@ export default function RoomPage({ params }: { params: { room: string } }) {
         JSON.parse(localStorage.getItem("userInfo") || "{}").$id,
         {
           x_point: event.clientX,
-          y_point: event.clientY,
+          y_point: event.clientY+5,
         }
       );
     };

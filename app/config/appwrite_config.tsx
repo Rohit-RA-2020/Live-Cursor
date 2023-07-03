@@ -87,8 +87,8 @@ class AppwriteConfig {
     try {
       this.account.createOAuth2Session(
         "google",
-        `http://localhost:3000/login/sucess`,
-        `http://localhost:3000/login/failure`,
+        `${process.env.NEXT_PUBLIC_APPURL}/login/sucess`,
+        `${process.env.NEXT_PUBLIC_APPURL}/login/failure`,
         []
       );
       this.getCurUser();
