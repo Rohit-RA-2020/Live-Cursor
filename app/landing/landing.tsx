@@ -24,7 +24,7 @@ const CreateRoomButton = () => {
         roomName,
         JSON.parse(localStorage.getItem("userInfo") || "{}").$id
       )
-    router.push(`/room/${roomName}`);
+    router.push(`/room`);
   };
 
   return (
