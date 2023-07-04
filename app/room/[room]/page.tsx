@@ -110,7 +110,7 @@ export default function RoomPage({ params }: { params: { room: string } }) {
           users.map((item) => (
             <div key={item.$id}>
               <div
-                className="myContainer bg-red-500 w-100 h-100 absolute"
+                className="myContainer bg-red-500 w-100 h-100 absolute text-white"
                 style={{ left: item.x_point, top: item.y_point }}
               >
                 {item.name}
