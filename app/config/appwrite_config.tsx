@@ -62,6 +62,12 @@ class ServerConfig {
             "y_point",
             false
           );
+          this.databases.createUrlAttribute(
+            `${process.env.NEXT_PUBLIC_DATABASEID}`,
+            res.$id,
+            "image",
+            true,
+          )
           console.table(res);
         });
     } catch (error) {

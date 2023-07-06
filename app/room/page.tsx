@@ -62,6 +62,7 @@ export default function Room() {
                           creator: true,
                           x_point: 0.0,
                           y_point: 0.0,
+                          image: JSON.parse(localStorage.getItem("googleInfo") || "{}").picture,
                         }
                       );
                       router.push(`/room/${item.$id}`);

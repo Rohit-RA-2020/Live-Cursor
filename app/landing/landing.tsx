@@ -1,6 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ServerConfig } from "../config/appwrite_config";
+import { Client, Account } from "appwrite";
+
+const client = new Client();
+client
+  .setEndpoint("https://cloud.appwrite.io/v1")
+  .setProject(`${process.env.NEXT_PUBLIC_PROJECTID}`);
+const account = new Account(client);
 
 const CreateRoomButton = () => {
   const [showForm, setShowForm] = useState(false);
@@ -26,6 +33,21 @@ const CreateRoomButton = () => {
     router.push(`/room`);
   };
 
+  useEffect(() => {
+    account.getSession("current").then((res) => {
+      const response = fetch(
+        `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${res.providerAccessToken}`,
+        {
+          method: "GET",
+        }
+      ).then((response) => {
+        response.json().then((data) => {
+          localStorage.setItem("googleInfo", JSON.stringify(data));
+        });
+      });
+    });
+  });
+
   return (
     <div className="h-screen flex items-center justify-center">
       {!showForm ? (
@@ -39,7 +61,7 @@ const CreateRoomButton = () => {
           <button
             className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
             onClick={() => {
-              router.push(`/room`)
+              router.push(`/room`);
             }}
           >
             Explore Rooms

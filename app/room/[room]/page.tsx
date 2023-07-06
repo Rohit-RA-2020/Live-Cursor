@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { ServerConfig } from "../../config/appwrite_config";
 import { Client, Models } from "appwrite";
+import Image from "next/image";
 
 interface Coordinate {
   x: number;
@@ -37,7 +38,7 @@ export default function RoomPage({ params }: { params: { room: string } }) {
         JSON.parse(localStorage.getItem("userInfo") || "{}").$id,
         {
           x_point: event.clientX,
-          y_point: event.clientY+5,
+          y_point: event.clientY + 5,
         }
       );
     };
@@ -81,13 +82,15 @@ export default function RoomPage({ params }: { params: { room: string } }) {
           <button
             className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
             onClick={() => {
-              server.databases.deleteDocument(
-                `${process.env.NEXT_PUBLIC_DATABASEID}`,
-                params["room"],
-                JSON.parse(localStorage.getItem("userInfo") || "{}").$id
-              ).then(() => {
-                router.push(`/room`);
-              });
+              server.databases
+                .deleteDocument(
+                  `${process.env.NEXT_PUBLIC_DATABASEID}`,
+                  params["room"],
+                  JSON.parse(localStorage.getItem("userInfo") || "{}").$id
+                )
+                .then(() => {
+                  router.push(`/room`);
+                });
             }}
           >
             Exit Room
@@ -110,10 +113,17 @@ export default function RoomPage({ params }: { params: { room: string } }) {
           users.map((item) => (
             <div key={item.$id}>
               <div
-                className="myContainer bg-red-500 w-100 h-100 absolute text-white"
+                className="myContainer w-100 h-100 absolute text-white"
                 style={{ left: item.x_point, top: item.y_point }}
               >
-                {item.name}
+                <Image
+                  className="rounded-full"
+                  src={item.image}
+                  width={50}
+                  height={50}
+                  alt="Picture of the author"
+                />
+                <div className="text-black">{item.name}</div>
               </div>
             </div>
           ))}
